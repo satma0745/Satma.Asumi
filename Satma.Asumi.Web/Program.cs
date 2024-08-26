@@ -1,23 +1,23 @@
 using Satma.Asumi.Web.Components;
 
-var builder = WebApplication.CreateBuilder(args);
+var webApplicationBuilder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddRazorComponents()
+webApplicationBuilder.Services
+    .AddRazorComponents()
     .AddInteractiveServerComponents();
 
-var app = builder.Build();
+var webApplication = webApplicationBuilder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (!webApplication.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error", createScopeForErrors: true);
+    webApplication.UseExceptionHandler("/Error", createScopeForErrors: true);
 }
 
-app.UseStaticFiles();
-app.UseAntiforgery();
+webApplication.UseStaticFiles();
+webApplication.UseAntiforgery();
 
-app.MapRazorComponents<App>()
+webApplication
+    .MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
-app.Run();
+webApplication.Run();
