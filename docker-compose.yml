@@ -1,0 +1,6 @@
+﻿services:
+  satma.asumi.web:
+    image: satma.asumi.web
+    build:
+      context: .
+      dockerfile: Satma.Asumi.Web/Dockerfile
