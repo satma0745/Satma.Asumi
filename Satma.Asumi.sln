@@ -1,50 +1,22 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.0.0
-MinimumVisualStudioVersion = 16.0.0.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Satma.Asumi", "Satma.Asumi\Satma.Asumi.csproj", "{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Satma.Asumi.Client", "Satma.Asumi.Client\Satma.Asumi.Client.csproj", "{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Satma.Asumi.HttpApi", "Satma.Asumi.HttpApi\Satma.Asumi.HttpApi.csproj", "{DA2830F2-5163-49A9-B2AD-3B478D6723C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
-		Release|x64 = Release|x64
-		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}.Debug|x64.Build.0 = Debug|Any CPU
-		{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}.Debug|x86.Build.0 = Debug|Any CPU
-		{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}.Release|x64.ActiveCfg = Release|Any CPU
-		{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}.Release|x64.Build.0 = Release|Any CPU
-		{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}.Release|x86.ActiveCfg = Release|Any CPU
-		{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}.Release|x86.Build.0 = Release|Any CPU
-		{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}.Debug|x64.Build.0 = Debug|Any CPU
-		{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}.Debug|x86.Build.0 = Debug|Any CPU
-		{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}.Release|x64.ActiveCfg = Release|Any CPU
-		{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}.Release|x64.Build.0 = Release|Any CPU
-		{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}.Release|x86.ActiveCfg = Release|Any CPU
-		{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {DD84B3DC-2663-41AB-9ADF-F6ADB953E7CA}
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA2830F2-5163-49A9-B2AD-3B478D6723C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA2830F2-5163-49A9-B2AD-3B478D6723C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA2830F2-5163-49A9-B2AD-3B478D6723C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA2830F2-5163-49A9-B2AD-3B478D6723C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
