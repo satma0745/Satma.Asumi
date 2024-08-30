@@ -1,6 +1,9 @@
+using MudBlazor.Services;
 using Satma.Asumi.Web.Components;
 
 var webApplicationBuilder = WebApplication.CreateBuilder(args);
+
+webApplicationBuilder.Services.AddMudServices();
 
 webApplicationBuilder.Services
     .AddRazorComponents()
