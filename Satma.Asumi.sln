@@ -1,27 +1,50 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Satma.Asumi.Web", "Satma.Asumi.Web\Satma.Asumi.Web.csproj", "{D7299E17-BB2B-4C0A-A381-BED88667B460}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.0.0
+MinimumVisualStudioVersion = 16.0.0.0
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Satma.Asumi", "Satma.Asumi\Satma.Asumi.csproj", "{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3790E279-2DBB-453C-90E6-A00A04DDC151}"
-	ProjectSection(SolutionItems) = preProject
-		docker-compose.yml = docker-compose.yml
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Satma.Asumi.Client", "Satma.Asumi.Client\Satma.Asumi.Client.csproj", "{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}.Debug|x64.Build.0 = Debug|Any CPU
+		{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}.Debug|x86.Build.0 = Debug|Any CPU
+		{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}.Release|x64.ActiveCfg = Release|Any CPU
+		{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}.Release|x64.Build.0 = Release|Any CPU
+		{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}.Release|x86.ActiveCfg = Release|Any CPU
+		{B1A62FB0-260C-48EA-9DE2-8309C34F9DA1}.Release|x86.Build.0 = Release|Any CPU
+		{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}.Debug|x64.Build.0 = Debug|Any CPU
+		{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}.Debug|x86.Build.0 = Debug|Any CPU
+		{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}.Release|x64.ActiveCfg = Release|Any CPU
+		{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}.Release|x64.Build.0 = Release|Any CPU
+		{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}.Release|x86.ActiveCfg = Release|Any CPU
+		{B78ECB55-FBE3-464F-82A1-B872B9D8EF67}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D7299E17-BB2B-4C0A-A381-BED88667B460}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D7299E17-BB2B-4C0A-A381-BED88667B460}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D7299E17-BB2B-4C0A-A381-BED88667B460}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D7299E17-BB2B-4C0A-A381-BED88667B460}.Release|Any CPU.Build.0 = Release|Any CPU
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DD84B3DC-2663-41AB-9ADF-F6ADB953E7CA}
 	EndGlobalSection
 EndGlobal

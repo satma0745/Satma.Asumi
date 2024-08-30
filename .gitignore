@@ -1,4 +1,7 @@
 /.idea
 
-/Satma.Asumi.Web/bin
-/Satma.Asumi.Web/obj
+/Satma.Asumi/bin
+/Satma.Asumi/obj
+
+/Satma.Asumi.Client/bin
+/Satma.Asumi.Client/obj
