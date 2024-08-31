@@ -1,8 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-#nullable disable
-
 namespace Satma.Asumi.Web.Persistence.Migrations;
 
 public partial class AddUsers : Migration
@@ -17,6 +15,7 @@ public partial class AddUsers : Migration
                 display_name = table.Column<string>(type: "text", nullable: false),
                 phone_number = table.Column<string>(type: "text", nullable: false),
                 email = table.Column<string>(type: "text", nullable: false),
+                password = table.Column<string>(type: "text", nullable: false),
                 role = table.Column<string>(type: "text", nullable: false)
             },
             constraints: table => table.PrimaryKey("pk_users", x => x.id)

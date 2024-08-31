@@ -9,6 +9,7 @@ public class User
     public required string DisplayName { get; init; }
     public required string PhoneNumber { get; init; }
     public required string Email { get; init; }
+    public required string Password { get; init; }
     public required UserRole Role { get; init; }
 }
 
@@ -44,6 +45,10 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
         userEntity
             .Property(user => user.Email)
             .HasColumnName("email");
+
+        userEntity
+            .Property(user => user.Password)
+            .HasColumnName("password");
 
         userEntity
             .Property(user => user.Role)
