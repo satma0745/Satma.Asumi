@@ -1,26 +1,31 @@
+using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
 using Satma.Asumi.Web.Components;
+using Satma.Asumi.Web.Persistence;
 
-var builder = WebApplication.CreateBuilder(args);
+var webApplicationBuilder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddMudServices();
+var postgresConnectionString = webApplicationBuilder.Configuration.GetConnectionString("PostgreSQL");
+webApplicationBuilder.Services.AddDbContext<AsumiDbContext>(options => options.UseNpgsql(postgresConnectionString));
 
-// Add services to the container.
-builder.Services.AddRazorComponents()
+webApplicationBuilder.Services.AddMudServices();
+
+webApplicationBuilder.Services
+    .AddRazorComponents()
     .AddInteractiveServerComponents();
 
-var app = builder.Build();
+var webApplication = webApplicationBuilder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (!webApplication.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error", createScopeForErrors: true);
+    webApplication.UseExceptionHandler("/Error", createScopeForErrors: true);
 }
 
-app.UseStaticFiles();
-app.UseAntiforgery();
+webApplication.UseStaticFiles();
+webApplication.UseAntiforgery();
 
-app.MapRazorComponents<App>()
+webApplication
+    .MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
-app.Run();
+webApplication.Run();

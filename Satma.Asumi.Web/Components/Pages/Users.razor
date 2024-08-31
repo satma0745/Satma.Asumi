@@ -4,7 +4,7 @@
 
 <MudText Typo="Typo.h3">Users</MudText>
 
-<MudTable ContainerClass="mt-8" ServerData="ServerReload" Hover Striped>
+<MudTable ContainerClass="mt-8" ServerData="LoadUsers" Hover Striped>
     <HeaderContent>
         <MudTh>#</MudTh>
         <MudTh>Name</MudTh>
@@ -13,7 +13,7 @@
         <MudTh>Role</MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="#">@context.Index</MudTd>
+        <MudTd DataLabel="#">@context.RowNumber</MudTd>
         <MudTd DataLabel="Name">@context.DisplayName</MudTd>
         <MudTd DataLabel="Phone number">@context.PhoneNumber</MudTd>
         <MudTd DataLabel="E-Mail">@context.Email</MudTd>
@@ -32,14 +32,41 @@
 
 @code
 {
-    private async Task<TableData<UserViewModel>> ServerReload(TableState tableState, CancellationToken cancellationToke)
+    [Inject]
+    private AsumiDbContext DbContext { get; set; } = null!;
+    
+    private async Task<TableData<UserViewModel>> LoadUsers(TableState tableState, CancellationToken cancellationToken)
     {
-        await Task.Delay(300, cancellationToke);
+        var totalUsersCount = await DbContext.Users.CountAsync(cancellationToken);
+
+        var skippedUsersCount = tableState.PageSize * tableState.Page;
+        var userEntities = await DbContext.Users
+            .Skip(skippedUsersCount)
+            .Take(tableState.PageSize)
+            .ToListAsync(cancellationToken);
+
+        var users = userEntities.Select((userEntity, index) => new UserViewModel
+        {
+            RowNumber = index + skippedUsersCount + 1,
+            DisplayName = userEntity.DisplayName,
+            PhoneNumber = userEntity.PhoneNumber,
+            Email = userEntity.Email,
+            Role = userEntity.Role
+        });
 
         return new TableData<UserViewModel>
         {
-            Items = GetUsers(tableState.Page, tableState.PageSize),
-            TotalItems = 123
+            Items = users,
+            TotalItems = totalUsersCount
         };
+    }
+    
+    private class UserViewModel
+    {
+        public int RowNumber { get; init; }
+        public required string DisplayName { get; init; }
+        public required string PhoneNumber { get; init; }
+        public required string Email { get; init; }
+        public required UserRole Role { get; init; }
     }
 }
