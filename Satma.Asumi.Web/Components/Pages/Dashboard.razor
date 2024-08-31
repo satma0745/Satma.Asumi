@@ -1,0 +1,74 @@
+﻿@page "/"
+
+<PageTitle>Dashboard</PageTitle>
+
+<MudGrid Class="mt-8">
+    <MudItem xs="12" sm="6" md="3">
+        <MudCard Elevation="25" Class="rounded-lg pb-4 light-blue lighten-1 shades-text text-white">
+            <MudCardHeader Class="light-blue darken-1">
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h5">Total users</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <div class="d-flex justify-center">
+                    <MudText Typo="Typo.h1">@dashboardStatistics.TotalUsers</MudText>
+                </div>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="3">
+        <MudCard Elevation="25" Class="rounded-lg pb-4 light-green lighten-1 shades-text text-white">
+            <MudCardHeader Class="light-green darken-1">
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h5">Logins today</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <div class="d-flex justify-center">
+                    <MudText Typo="Typo.h1">@dashboardStatistics.LoginsToday</MudText>
+                </div>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="3">
+        <MudCard Elevation="25" Class="rounded-lg pb-4 red lighten-1 shades-text text-white">
+            <MudCardHeader Class="red darken-1">
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h5">Registrations today</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <div class="d-flex justify-center">
+                    <MudText Typo="Typo.h1">@dashboardStatistics.RegistrationsToday</MudText>
+                </div>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="3">
+        <MudCard Elevation="25" Class="rounded-lg pb-4 orange lighten-1 shades-text text-white">
+            <MudCardHeader Class="orange darken-1">
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h5">Daily active users</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <div class="d-flex justify-center">
+                    <MudText Typo="Typo.h1">@dashboardStatistics.DailyActiveUsers</MudText>
+                </div>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>
+
+@code
+{
+    private record DashboardStatistics(int TotalUsers, int LoginsToday, int RegistrationsToday, int DailyActiveUsers);
+
+    private DashboardStatistics dashboardStatistics = new(
+        TotalUsers: 4213,
+        LoginsToday: 27,
+        RegistrationsToday: 15,
+        DailyActiveUsers: 121
+    );
+}
