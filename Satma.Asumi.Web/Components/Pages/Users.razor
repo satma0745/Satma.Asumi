@@ -11,6 +11,7 @@
         <MudTh>Phone number</MudTh>
         <MudTh>E-Mail</MudTh>
         <MudTh>Role</MudTh>
+        <MudTh>Actions</MudTh>
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="#">@context.RowNumber</MudTd>
@@ -18,6 +19,16 @@
         <MudTd DataLabel="Phone number">@context.PhoneNumber</MudTd>
         <MudTd DataLabel="E-Mail">@context.Email</MudTd>
         <MudTd DataLabel="Role">@context.Role</MudTd>
+        <MudTd DataLabel="Actions">
+            <MudMenu 
+                Icon="@Icons.Material.Filled.MoreVert" 
+                AriaLabel="User actions"
+                AnchorOrigin="Origin.CenterRight"
+                TransformOrigin="Origin.CenterLeft"
+            >
+                <MudMenuItem OnClick="() => ResetUserPassword(context.Id)">Reset password</MudMenuItem>
+            </MudMenu>
+        </MudTd>
     </RowTemplate>
     <NoRecordsContent>
         <MudText>No users found.</MudText>
@@ -30,10 +41,36 @@
     </PagerContent>
 </MudTable>
 
+<MudMessageBox @ref="passwordResetConfirmationMessageBox" Title="Password reset" NoText="No, keep the old password">
+    <MessageContent>
+        <MudText>Are You sure that You want to reset this user's password?</MudText>
+        <MudText>During this process, all currently active user's sessions will be terminated.</MudText>
+        <MudText>User will be assigned a new <b>temporary password</b>, which <b>You should send to the user</b>.</MudText>
+    </MessageContent>
+    <YesButton>
+        <MudButton Color="Color.Error">Yes, reset the password</MudButton>
+    </YesButton>
+</MudMessageBox>
+
+<MudMessageBox @ref="passwordResetSucceededMessageBox" Title="Password reset">
+    <MessageContent>
+        <MudText>User's password was changed to: <b>@temporaryPassword</b></MudText>
+        <MudText>Send this <b>temporary</b> password to the user.</MudText>
+    </MessageContent>
+    <YesButton>
+        <MudButton>Ok</MudButton>
+    </YesButton>
+</MudMessageBox>
+
 @code
 {
     [Inject]
     private AsumiDbContext DbContext { get; set; } = null!;
+    
+    private MudMessageBox passwordResetConfirmationMessageBox;
+    
+    private MudMessageBox passwordResetSucceededMessageBox;
+    private string? temporaryPassword;
     
     private async Task<TableData<UserViewModel>> LoadUsers(TableState tableState, CancellationToken cancellationToken)
     {
@@ -48,6 +85,7 @@
         var users = userEntities.Select((userEntity, index) => new UserViewModel
         {
             RowNumber = index + skippedUsersCount + 1,
+            Id = userEntity.Id,
             DisplayName = userEntity.DisplayName,
             PhoneNumber = userEntity.PhoneNumber,
             Email = userEntity.Email,
@@ -60,10 +98,34 @@
             TotalItems = totalUsersCount
         };
     }
+
+    private async Task ResetUserPassword(Guid userId)
+    {
+        var passwordChangeConfirmed = await passwordResetConfirmationMessageBox.ShowAsync();
+        if (passwordChangeConfirmed is not true)
+        {
+            return;
+        }
+        
+        var user = await DbContext.Users
+            .Where(user => user.Id == userId)
+            .SingleAsync();
+
+        const string passwordCharactersList = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_-.@~=#!$";
+        temporaryPassword = new string(Random.Shared.GetItems<char>(passwordCharactersList, 20));
+        
+        var hashedTemporaryPassword = BcryptNet.EnhancedHashPassword(temporaryPassword);
+        user.Password = hashedTemporaryPassword;
+
+        await DbContext.SaveChangesAsync();
+
+        _ = await passwordResetSucceededMessageBox.ShowAsync();
+    }
     
     private class UserViewModel
     {
-        public int RowNumber { get; init; }
+        public required int RowNumber { get; init; }
+        public required Guid Id { get; init; }
         public required string DisplayName { get; init; }
         public required string PhoneNumber { get; init; }
         public required string Email { get; init; }
