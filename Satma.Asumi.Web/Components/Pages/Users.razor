@@ -1,0 +1,41 @@
+@page "/users"
+
+@using Satma.Asumi.Web.Entities
+
+<PageTitle>Users</PageTitle>
+
+<MudText Typo="Typo.h3">Users</MudText>
+
+<MudTable ContainerClass="mt-8" Items="@users" Hover Striped>
+    <HeaderContent>
+        <MudTh>#</MudTh>
+        <MudTh>Name</MudTh>
+        <MudTh>Phone number</MudTh>
+        <MudTh>E-Mail</MudTh>
+        <MudTh>Role</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="#">@context.Id</MudTd>
+        <MudTd DataLabel="Name">@context.DisplayName</MudTd>
+        <MudTd DataLabel="Phone number">@context.PhoneNumber</MudTd>
+        <MudTd DataLabel="E-Mail">@context.Email</MudTd>
+        <MudTd DataLabel="Role">@context.Role</MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
+
+@code
+{
+    private static readonly User sampleUser = new()
+    {
+        Id = Guid.NewGuid(),
+        DisplayName = "Stanislav Lebedyantsev",
+        PhoneNumber = "+375 (29) 367-85-14",
+        Email = "stas.lebed@gmail.com",
+        Role = UserRole.Customer
+    };
+
+    private readonly IReadOnlyCollection<User> users = Enumerable.Repeat(sampleUser, 10).ToList();
+}
