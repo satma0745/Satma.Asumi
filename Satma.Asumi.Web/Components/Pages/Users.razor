@@ -1,12 +1,10 @@
 @page "/users"
 
-@using Satma.Asumi.Web.Entities
-
 <PageTitle>Users</PageTitle>
 
 <MudText Typo="Typo.h3">Users</MudText>
 
-<MudTable ContainerClass="mt-8" Items="@users" Hover Striped>
+<MudTable ContainerClass="mt-8" ServerData="ServerReload" Hover Striped>
     <HeaderContent>
         <MudTh>#</MudTh>
         <MudTh>Name</MudTh>
@@ -15,12 +13,18 @@
         <MudTh>Role</MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="#">@context.Id</MudTd>
+        <MudTd DataLabel="#">@context.Index</MudTd>
         <MudTd DataLabel="Name">@context.DisplayName</MudTd>
         <MudTd DataLabel="Phone number">@context.PhoneNumber</MudTd>
         <MudTd DataLabel="E-Mail">@context.Email</MudTd>
         <MudTd DataLabel="Role">@context.Role</MudTd>
     </RowTemplate>
+    <NoRecordsContent>
+        <MudText>No users found.</MudText>
+    </NoRecordsContent>
+    <LoadingContent>
+        <MudText>Loading...</MudText>
+    </LoadingContent>
     <PagerContent>
         <MudTablePager />
     </PagerContent>
@@ -28,14 +32,14 @@
 
 @code
 {
-    private static readonly User sampleUser = new()
+    private async Task<TableData<UserViewModel>> ServerReload(TableState tableState, CancellationToken cancellationToke)
     {
-        Id = Guid.NewGuid(),
-        DisplayName = "Stanislav Lebedyantsev",
-        PhoneNumber = "+375 (29) 367-85-14",
-        Email = "stas.lebed@gmail.com",
-        Role = UserRole.Customer
-    };
+        await Task.Delay(300, cancellationToke);
 
-    private readonly IReadOnlyCollection<User> users = Enumerable.Repeat(sampleUser, 10).ToList();
+        return new TableData<UserViewModel>
+        {
+            Items = GetUsers(tableState.Page, tableState.PageSize),
+            TotalItems = 123
+        };
+    }
 }
