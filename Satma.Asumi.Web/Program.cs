@@ -8,8 +8,10 @@ var webApplicationBuilder = WebApplication.CreateBuilder(args);
 var postgresConnectionString = webApplicationBuilder.Configuration.GetConnectionString("PostgreSQL");
 webApplicationBuilder.Services.AddDbContext<AsumiDbContext>(options => options.UseNpgsql(postgresConnectionString));
 
-webApplicationBuilder.Services.AddMudServices();
+webApplicationBuilder.Services.AddSwaggerGen();
+webApplicationBuilder.Services.AddControllers();
 
+webApplicationBuilder.Services.AddMudServices();
 webApplicationBuilder.Services
     .AddRazorComponents()
     .AddInteractiveServerComponents();
@@ -21,8 +23,16 @@ if (!webApplication.Environment.IsDevelopment())
     webApplication.UseExceptionHandler("/Error", createScopeForErrors: true);
 }
 
+if (webApplication.Environment.IsDevelopment())
+{
+    webApplication.UseSwagger();
+    webApplication.UseSwaggerUI();
+}
+
 webApplication.UseStaticFiles();
 webApplication.UseAntiforgery();
+
+webApplication.MapControllers();
 
 webApplication
     .MapRazorComponents<App>()

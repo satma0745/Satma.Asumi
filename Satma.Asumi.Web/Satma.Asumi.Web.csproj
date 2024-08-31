@@ -25,6 +25,7 @@
       </PackageReference>
       <PackageReference Include="MudBlazor" Version="7.6.0" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
     </ItemGroup>
 
 </Project>
