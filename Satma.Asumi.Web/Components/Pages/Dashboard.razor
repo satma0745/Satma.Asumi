@@ -65,12 +65,31 @@
 
 @code
 {
-    private record DashboardStatistics(int TotalUsers, int LoginsToday, int RegistrationsToday, int DailyActiveUsers);
+    [Inject]
+    private AsumiDbContext DbContext { get; set; } = null!;
 
-    private DashboardStatistics dashboardStatistics = new(
-        TotalUsers: 4213,
-        LoginsToday: 27,
-        RegistrationsToday: 15,
-        DailyActiveUsers: 121
-    );
+    private readonly DashboardStatistics dashboardStatistics = new()
+    {
+        TotalUsers = 0,
+        LoginsToday = 0,
+        RegistrationsToday = 0,
+        DailyActiveUsers = 0
+    };
+    
+    protected override async Task OnInitializedAsync()
+    {
+        dashboardStatistics.TotalUsers = await DbContext.Users.CountAsync();
+
+        dashboardStatistics.RegistrationsToday = await DbContext.Users
+            .Where(user => user.RegisteredAtUtc.Date == DateTime.UtcNow.Date)
+            .CountAsync();
+    }
+
+    private class DashboardStatistics
+    {
+        public required int TotalUsers { get; set; }
+        public required int LoginsToday { get; set; }
+        public required int RegistrationsToday { get; set; }
+        public required int DailyActiveUsers { get; set; }
+    }
 }

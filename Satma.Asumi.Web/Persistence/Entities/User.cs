@@ -11,6 +11,7 @@ public class User
     public required string Email { get; init; }
     public required string Password { get; set; }
     public required UserRole Role { get; init; }
+    public DateTime RegisteredAtUtc { get; private set; } = DateTime.UtcNow;
 }
 
 public enum UserRole
@@ -54,5 +55,9 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
             .Property(user => user.Role)
             .HasColumnName("role")
             .HasConversion<string>();
+
+        userEntity
+            .Property(user => user.RegisteredAtUtc)
+            .HasColumnName("registered_at_utc");
     }
 }

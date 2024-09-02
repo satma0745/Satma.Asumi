@@ -49,6 +49,10 @@ namespace Satma.Asumi.Web.Persistence.Migrations
                         .HasColumnType("text")
                         .HasColumnName("phone_number");
 
+                    b.Property<DateTime>("RegisteredAtUtc")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("registered_at_utc");
+
                     b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("text")

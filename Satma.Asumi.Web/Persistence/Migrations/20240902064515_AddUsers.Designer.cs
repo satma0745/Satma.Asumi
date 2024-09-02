@@ -12,7 +12,7 @@ using Satma.Asumi.Web.Persistence;
 namespace Satma.Asumi.Web.Persistence.Migrations
 {
     [DbContext(typeof(AsumiDbContext))]
-    [Migration("20240831180110_AddUsers")]
+    [Migration("20240902064515_AddUsers")]
     partial class AddUsers
     {
         /// <inheritdoc />
@@ -51,6 +51,10 @@ namespace Satma.Asumi.Web.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("phone_number");
+
+                    b.Property<DateTime>("RegisteredAtUtc")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("registered_at_utc");
 
                     b.Property<string>("Role")
                         .IsRequired()

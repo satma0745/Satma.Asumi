@@ -16,7 +16,8 @@ public partial class AddUsers : Migration
                 phone_number = table.Column<string>(type: "text", nullable: false),
                 email = table.Column<string>(type: "text", nullable: false),
                 password = table.Column<string>(type: "text", nullable: false),
-                role = table.Column<string>(type: "text", nullable: false)
+                role = table.Column<string>(type: "text", nullable: false),
+                registered_at_utc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
             },
             constraints: table => table.PrimaryKey("pk_users", x => x.id)
         );
