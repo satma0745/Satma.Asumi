@@ -14,11 +14,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <!-- emits global using BcryptNet = global::BCrypt.Net.BCrypt; -->
-        <Using Include="BCrypt.Net.BCrypt" Alias="BcryptNet"/>
-    </ItemGroup>
-
-    <ItemGroup>
       <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
       <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">

@@ -10,7 +10,10 @@ namespace Satma.Asumi.Web.Endpoints.Jwt;
 [ApiController]
 [Consumes(MediaTypeNames.Application.Json)]
 [Produces(MediaTypeNames.Application.Json)]
-public class IssueTokenPairController(AsumiDbContext dbContext, JwtTokenService jwtTokenService) : ControllerBase
+public class IssueTokenPairController(
+    AsumiDbContext dbContext,
+    JwtTokenService jwtTokenService,
+    PasswordService passwordService) : ControllerBase
 {
     [HttpPost("/api/jwt/issue-token-pair")]
     [ProducesResponseType<JwtTokenPairDto>(StatusCodes.Status200OK)]
@@ -27,7 +30,7 @@ public class IssueTokenPairController(AsumiDbContext dbContext, JwtTokenService 
             ModelState.AddModelError("$", "Invalid credentials provided.");
             return ValidationProblem();
         }
-        if (!BcryptNet.EnhancedVerify(userCredentialsDto.Password, user.Password))
+        if (!passwordService.DoPasswordsMatch(userCredentialsDto.Password, user.Password))
         {
             ModelState.AddModelError("$", "Invalid credentials provided.");
             return ValidationProblem();

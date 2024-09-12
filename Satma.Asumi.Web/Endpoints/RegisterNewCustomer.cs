@@ -4,13 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Satma.Asumi.Web.Persistence;
 using Satma.Asumi.Web.Persistence.Entities;
+using Satma.Asumi.Web.Services;
 
 namespace Satma.Asumi.Web.Endpoints;
 
 [ApiController]
 [Consumes(MediaTypeNames.Application.Json)]
 [Produces(MediaTypeNames.Application.Json)]
-public class RegisterNewCustomer(AsumiDbContext dbContext) : ControllerBase
+public class RegisterNewCustomer(AsumiDbContext dbContext, PasswordService passwordService) : ControllerBase
 {
     [HttpPost("/api/register-new-customer")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -35,7 +36,7 @@ public class RegisterNewCustomer(AsumiDbContext dbContext) : ControllerBase
             DisplayName = userRegistrationDto.DisplayName,
             PhoneNumber = userRegistrationDto.PhoneNumber,
             Email = userRegistrationDto.Email,
-            Password = BcryptNet.EnhancedHashPassword(userRegistrationDto.Password),
+            Password = passwordService.HashPassword(userRegistrationDto.Password),
             Role = UserRole.Customer
         };
 

@@ -67,6 +67,9 @@
     [Inject]
     private AsumiDbContext DbContext { get; set; } = null!;
     
+    [Inject]
+    private PasswordService PasswordService { get; set; } = null!;
+    
     private MudMessageBox passwordResetConfirmationMessageBox;
     
     private MudMessageBox passwordResetSucceededMessageBox;
@@ -114,7 +117,7 @@
         const string passwordCharactersList = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_-.@~=#!$";
         temporaryPassword = new string(Random.Shared.GetItems<char>(passwordCharactersList, 20));
         
-        var hashedTemporaryPassword = BcryptNet.EnhancedHashPassword(temporaryPassword);
+        var hashedTemporaryPassword = PasswordService.HashPassword(temporaryPassword);
         user.Password = hashedTemporaryPassword;
 
         await DbContext.SaveChangesAsync();
