@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
 using Satma.Asumi.Web.Components;
 using Satma.Asumi.Web.Persistence;
+using Satma.Asumi.Web.Services;
 
 var webApplicationBuilder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,9 @@ webApplicationBuilder.Services.AddDbContext<AsumiDbContext>(options => options.U
 
 webApplicationBuilder.Services.AddSwaggerGen();
 webApplicationBuilder.Services.AddControllers();
+
+webApplicationBuilder.Services.AddSingleton<JwtSigningKeyService>();
+webApplicationBuilder.Services.AddSingleton<JwtTokenService>();
 
 webApplicationBuilder.Services.AddMudServices();
 webApplicationBuilder.Services
