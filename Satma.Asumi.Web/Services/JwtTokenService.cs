@@ -1,27 +1,38 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
+using Satma.Asumi.Web.Persistence;
+using Satma.Asumi.Web.Persistence.Entities;
 
 namespace Satma.Asumi.Web.Services;
 
 public class JwtTokenService
 {
+    // TODO: Load these parameters from configuration.
+    private static readonly TimeSpan accessTokenLifetime = TimeSpan.FromMinutes(5);
+    private static readonly TimeSpan refreshTokenLifetime = TimeSpan.FromHours(12);
+
+    private readonly AsumiDbContext dbContext;
     private readonly JwtSigningKeyService jwtSigningKeyService;
     private readonly JwtSecurityTokenHandler jwtSecurityTokenHandler;
 
-    public JwtTokenService(JwtSigningKeyService jwtSigningKeyService)
+    public JwtTokenService(AsumiDbContext dbContext, JwtSigningKeyService jwtSigningKeyService)
     {
+        this.dbContext = dbContext;
         this.jwtSigningKeyService = jwtSigningKeyService;
         jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
     }
 
-    public JwtTokenPair IssueJwtTokenPair(Guid bearerId, Guid refreshTokenId)
+    public async Task<JwtTokenPair> IssueJwtTokenPair(
+        Guid bearerId,
+        Guid refreshTokenId,
+        CancellationToken cancellationToken)
     {
         var accessToken = IssueJwtToken(
             new Dictionary<string, object>
             {
                 { JwtRegisteredClaimNames.Sub, bearerId.ToString() }
             },
-            TimeSpan.FromMinutes(5)
+            accessTokenLifetime
         );
 
         var refreshToken = IssueJwtToken(
@@ -30,8 +41,18 @@ public class JwtTokenService
                 { JwtRegisteredClaimNames.Sub, bearerId.ToString() },
                 { JwtRegisteredClaimNames.Jti, refreshTokenId.ToString() }
             },
-            TimeSpan.FromHours(5)
+            refreshTokenLifetime
         );
+        
+        var newUserSession = new UserSession
+        {
+            Id = Guid.NewGuid(),
+            UserId = bearerId,
+            RefreshTokenId = refreshTokenId,
+            ExpiresAt = DateTime.UtcNow.Add(refreshTokenLifetime)
+        };
+        dbContext.UserSessions.Add(newUserSession);
+        await dbContext.SaveChangesAsync(cancellationToken);
 
         return new JwtTokenPair
         {

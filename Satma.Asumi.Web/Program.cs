@@ -13,7 +13,7 @@ webApplicationBuilder.Services.AddSwaggerGen();
 webApplicationBuilder.Services.AddControllers();
 
 webApplicationBuilder.Services.AddSingleton<JwtSigningKeyService>();
-webApplicationBuilder.Services.AddSingleton<JwtTokenService>();
+webApplicationBuilder.Services.AddScoped<JwtTokenService>();
 
 webApplicationBuilder.Services.AddMudServices();
 webApplicationBuilder.Services

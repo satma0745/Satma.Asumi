@@ -37,7 +37,8 @@ public class RegisterNewCustomer(AsumiDbContext dbContext, PasswordService passw
             PhoneNumber = userRegistrationDto.PhoneNumber,
             Email = userRegistrationDto.Email,
             Password = passwordService.HashPassword(userRegistrationDto.Password),
-            Role = UserRole.Customer
+            Role = UserRole.Customer,
+            RegisteredAtUtc = DateTime.UtcNow
         };
 
         dbContext.Users.Add(user);

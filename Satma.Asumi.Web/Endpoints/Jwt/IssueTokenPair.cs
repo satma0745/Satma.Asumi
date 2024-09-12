@@ -22,6 +22,7 @@ public class IssueTokenPairController(
         CancellationToken cancellationToken)
     {
         var user = await dbContext.Users
+            .AsNoTracking()
             .Where(user => user.Email == userCredentialsDto.Email)
             .SingleOrDefaultAsync(cancellationToken);
 
@@ -36,10 +37,9 @@ public class IssueTokenPairController(
             return ValidationProblem();
         }
 
-        // TODO: save Refresh Token into a DB.
         var refreshTokenId = Guid.NewGuid();
+        var jwtTokenPair = await jwtTokenService.IssueJwtTokenPair(user.Id, refreshTokenId, cancellationToken);
 
-        var jwtTokenPair = jwtTokenService.IssueJwtTokenPair(user.Id, refreshTokenId);
         var jwtTokenPairDto = new JwtTokenPairDto
         {
             AccessToken = jwtTokenPair.AccessToken,

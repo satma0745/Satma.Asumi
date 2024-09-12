@@ -7,6 +7,7 @@ namespace Satma.Asumi.Web.Persistence;
 public class AsumiDbContext : DbContext
 {
     public DbSet<User> Users => Set<User>();
+    public DbSet<UserSession> UserSessions => Set<UserSession>();
     
     public AsumiDbContext(DbContextOptions<AsumiDbContext> options)
         : base(options)

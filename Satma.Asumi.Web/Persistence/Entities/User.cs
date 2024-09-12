@@ -6,12 +6,18 @@ namespace Satma.Asumi.Web.Persistence.Entities;
 public class User
 {
     public required Guid Id { get; init; }
+    
     public required string DisplayName { get; init; }
     public required string PhoneNumber { get; init; }
+    
     public required string Email { get; init; }
     public required string Password { get; set; }
+    
     public required UserRole Role { get; init; }
-    public DateTime RegisteredAtUtc { get; private set; } = DateTime.UtcNow;
+    // TODO: Drop the `Utc` postfix.
+    public required DateTime RegisteredAtUtc { get; init; }
+    
+    public List<UserSession>? Sessions { get; init; }
 }
 
 public enum UserRole
